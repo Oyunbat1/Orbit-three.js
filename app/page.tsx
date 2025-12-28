@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen relative bg-black overflow-hidden">
-      <Scene currentView={currentView} />
+      <Scene currentView={currentView} onViewChange={setCurrentView} />
       <UI currentView={currentView} onViewChange={setCurrentView} />
     </main>
   );
