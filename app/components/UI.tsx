@@ -9,7 +9,7 @@ interface UIProps {
 }
 
 export default function UI({ currentView, onViewChange }: UIProps) {
-    // @ts-ignore
+
     const session = useStore(store, (state) => state.session);
 
     const toggleVR = async () => {
@@ -18,7 +18,6 @@ export default function UI({ currentView, onViewChange }: UIProps) {
             return;
         }
 
-        // Check if secure context (HTTPS)
         if (!window.isSecureContext) {
             window.alert("WebXR requires a secure context (HTTPS). If testing locally on a network, enable SSL.");
             return;
@@ -74,7 +73,7 @@ export default function UI({ currentView, onViewChange }: UIProps) {
                 <button
                     onClick={toggleVR}
                     className={`px-6 py-2 rounded-full font-semibold transition-all shadow-lg cursor-pointer ${session
-                        ? 'bg-red-700 text-white hover:bg-red-800' // Distinct style for active (Exit)
+                        ? 'bg-red-700 text-white hover:bg-red-800'
                         : 'bg-red-500 text-white hover:bg-red-600'
                         }`}
                 >

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import { useFrame, useThree, useLoader } from '@react-three/fiber';
 import { Vector3, Group, Mesh, TextureLoader } from 'three';
 
