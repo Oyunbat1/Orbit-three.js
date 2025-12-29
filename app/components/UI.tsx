@@ -13,13 +13,28 @@ export default function UI({ currentView, onViewChange }: UIProps) {
     const session = useStore(store, (state) => state.session);
 
     const toggleVR = async () => {
+        if (!navigator.xr) {
+            window.alert("WebXR not supported in this browser. Please use a VR-compatible browser like Meta Quest Browser or Chrome with WebXR enabled.");
+            return;
+        }
+
+        // Check if secure context (HTTPS)
+        if (!window.isSecureContext) {
+            window.alert("WebXR requires a secure context (HTTPS). If testing locally on a network, enable SSL.");
+            return;
+        }
+
         if (session) {
             session.end();
         } else {
             try {
-                await store.enterVR();
+                const session = await store.enterVR();
+                if (!session) {
+                    window.alert("Failed to create WebXR session. Check console for details.");
+                }
             } catch (e) {
                 console.error("Failed to enter VR:", e);
+                window.alert(`Failed to enter VR: ${e instanceof Error ? e.message : String(e)}`);
             }
         }
     };
